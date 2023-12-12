@@ -2,35 +2,60 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(CharacterController))]
 public class PlayerScript : MonoBehaviour
 {
-    //Variables for Rotating Camera
-    [Range(0f, 10f)] public float rotateSpeed;
-    public GameObject playerCamera;
+    //Movement variables
+    public Camera playerCamera;
+    public float walkSpeed = 6f;
+    public float runSpeed = 12f;
 
-    float rotationY = 0f;
-    bool lockedCursor = true;
+    //Camera variable
+    [Range(0f, 10f)] public float lookSpeed = 2f;
+    public float lookXLimit = 90f;
 
-    // Start is called before the first frame update
+
+    Vector3 moveDirection = Vector3.zero;
+    float rotationX = 0;
+
+    public bool canMove = true;
+
+    
+    CharacterController characterController;
     void Start()
     {
-        //Lock and hide cursor
-        Cursor.visible = false;
+        characterController = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        //Rotate Camera around its X-Axis
-        float mouseX = Input.GetAxis("Mouse X");
-        Vector3 rotation = new Vector3(0, mouseX, 0) * rotateSpeed;
-        transform.Rotate(rotation);
 
-        //Rotate Camera around its Y-Axis
-        float mouseY = Input.GetAxis("Mouse Y") * rotateSpeed;
-        rotationY += mouseY;
-        rotationY = Mathf.Clamp(rotationY, -90f, 90f);
-        playerCamera.transform.localEulerAngles = new Vector3(-rotationY, 0, 0);
+        #region Handles Movment
+        Vector3 forward = transform.TransformDirection(Vector3.forward);
+        Vector3 right = transform.TransformDirection(Vector3.right);
+
+        // Press Left Shift to run
+        bool isRunning = Input.GetKey(KeyCode.LeftShift);
+        float curSpeedX = canMove ? (isRunning ? runSpeed : walkSpeed) * Input.GetAxis("Vertical") : 0;
+        float curSpeedY = canMove ? (isRunning ? runSpeed : walkSpeed) * Input.GetAxis("Horizontal") : 0;
+        float movementDirectionY = moveDirection.y;
+        moveDirection = (forward * curSpeedX) + (right * curSpeedY);
+        #endregion
+
+        #region Handles Rotation
+        characterController.Move(moveDirection * Time.deltaTime);
+
+        if (canMove)
+        {
+            rotationX += -Input.GetAxis("Mouse Y") * lookSpeed;
+            rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
+            playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
+            transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
+        }
+        #endregion
     }
+
 }
+
