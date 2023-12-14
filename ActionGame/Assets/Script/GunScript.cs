@@ -11,6 +11,7 @@ public class GunScript : MonoBehaviour
     public Transform attackPoint;
     public GameObject muzzleFlash;
     public GameObject impactEffect;
+
     // Update is called once per frame
     void Update()
     {
