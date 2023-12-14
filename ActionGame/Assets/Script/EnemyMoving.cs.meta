@@ -3,7 +3,9 @@ guid: dd1af27096628594385cfed187c47df3
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - zombie: {instanceID: 0}
+  - scoreboard: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
