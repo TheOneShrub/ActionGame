@@ -33,7 +33,6 @@ public class GunScript : MonoBehaviour
             }
             if(hit.transform.CompareTag("Enemy"))
             {
-                //Debug.Log(hit.transform.name);
                 GameObject bloodSplat = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
                 Destroy(bloodSplat, 1.1f);
             }

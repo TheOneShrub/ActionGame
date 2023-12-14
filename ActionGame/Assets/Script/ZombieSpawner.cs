@@ -22,15 +22,15 @@ public class ZombieSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(scoring.currentScore>=5000 && scoring.currentScore<10000){
+        if(scoring.currentScore>=3000 && scoring.currentScore<6000){
             spawnLowRange = 2f;
             spawnHighRange = 3f;
         }
-        if(scoring.currentScore>=10000 && scoring.currentScore<15000){
+        if(scoring.currentScore>=6000 && scoring.currentScore<10000){
             spawnLowRange = 1.5f;
             spawnHighRange = 2.5f;
         }
-        if(scoring.currentScore>=15000){
+        if(scoring.currentScore>=10000){
             spawnLowRange = 1f;
             spawnHighRange = 2f;
         }

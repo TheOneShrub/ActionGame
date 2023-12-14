@@ -31,10 +31,8 @@ public class EnemyMoving : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Collided");
         if (collision.gameObject.tag == "Boundary")
         {
-            Debug.Log("Working");
             speed = 0f;
         }
     }
