@@ -13,19 +13,23 @@ public class EnemyMoving : MonoBehaviour
     {
         scoreboard = GameObject.Find("Score");
         scoring = scoreboard.GetComponent<ScoreScript>();
-        if(scoring.currentScore >= 5000 && scoring.currentScore < 10000){
+        if (scoring.currentScore >= 5000 && scoring.currentScore < 10000)
+        {
             speed = Random.Range(2f, 3f);
         }
-        if(scoring.currentScore >= 10000 && scoring.currentScore < 15000){
+        if (scoring.currentScore >= 10000 && scoring.currentScore < 15000)
+        {
             speed = Random.Range(2f, 5f);
         }
-        if(scoring.currentScore >= 15000){
+        if (scoring.currentScore >= 15000)
+        {
             speed = Random.Range(3f, 6f);
         }
     }
 
     // Update is called once per frame
-    void Update(){
+    void Update()
+    {
         zombie.transform.Translate(-Vector3.forward * speed * Time.deltaTime);
     }
 

@@ -11,12 +11,15 @@ public class GunScript : MonoBehaviour
     public Transform attackPoint;
     public GameObject muzzleFlash;
     public GameObject impactEffect;
+    public AudioSource source;
+    public AudioClip clip;
 
     // Update is called once per frame
     void Update()
     {
         if(Input.GetButtonDown("Fire1")){
             Shoot();
+           // source.PlayOneShot(clip);
         }
     }
 

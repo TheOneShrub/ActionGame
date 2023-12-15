@@ -21,6 +21,8 @@ public class PlayerLives : MonoBehaviour
     {
         if (lives <= 0){
             finalScore = scoring.currentScore;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
             SceneManager.LoadScene("GameOver");
         }
     }
